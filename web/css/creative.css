@@ -415,3 +415,7 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #222222;
 }
+.homeHeading{
+
+  color: white; border-radius: 6px; text-shadow: 2px 3px #222222; font-size: 90px
+}
