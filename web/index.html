@@ -65,7 +65,7 @@
     <header>
         <div class="header-content">
             <div class="header-content-inner">
-                <h1 id="homeHeading" style="color: white ; background-color:#2ebd59 ; border-radius: 6px" >Discover music from local artists</h1>
+                <h1 id="homeHeading" style="color: white; border-radius: 6px; text-shadow: 2px 3px #222222; font-size: 90px" >Discover music from local artists</h1>
                 <hr>
                 <p style="color: white">Are you traveling? Are you in another city? Discover the best music from local artists with, wherever you are.</p>
                 <a href="#about" class="btn btn-primary btn-xl page-scroll" >Try it out</a>
@@ -80,9 +80,10 @@
                     <h2 class="section-heading">Current Location: Munich</h2>
                     <hr class="light">
                     <p class="text-faded">We found a local band for you! Just play the press button and start listening to the best local music! </p>
-                    <iframe src="https://embed.spotify.com/?uri=spotify:track:5JunxkcjfCYcY7xJ29tLai" frameborder="0" allowtransparency="true"></iframe>
+                    <iframe id="myIframe" onLoad="iframeDidLoad();" src="https://embed.spotify.com/?uri=spotify:track:1w5sLDYzYAGI0AkLc6FPlO" width="250" height="80" frameborder="0" allowtransparency="true" style="margin-bottom: 20px"></iframe>
                 </div>
             </div>
+            <button class="btn btn-primary btn-xl page-scroll" value="Change site" onClick="changeSong()" style = "display:block; margin: 0 auto" >Next track</button>
         </div>
     </section>
 
@@ -92,7 +93,7 @@
               <div class="col-lg-8 col-lg-offset-2 text-center">
                   <h2 class="section-heading">Contact us!</h2>
                   <hr class="primary">
-                  <p>This local band discovery app is made with love by four students at the Technical University Munich as part of the course Komputer&Creativität</p>
+                  <p>This local band discovery app is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by four students at the Technical University Munich as part of the course Komputer&Creativität</p>
               </div>
               <div class="col-lg-4 col-lg-offset-2 text-center">
                   <i class="fa fa-phone fa-3x sr-contact"></i>
@@ -121,6 +122,10 @@
 
     <!-- Theme JavaScript -->
     <script src="js/creative.min.js"></script>
+
+    <!-- Song generate-->
+    <script src="js/app.js"></script>
+    <script src="js/playSpotify.js"></script
 
 </body>
 
