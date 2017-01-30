@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+<title>MOFOCKING STARBOY</title>
+</head>
+<h>THIS WILL SEARCH THE SPOTIFY-ID OF A GIVEN ARTIST<br></h>
+ 
+<script type="text/javascript" src="getID.js"></script>  
+    
+<script type="text/javascript">
+function myFunction(x) {
+    var y = getID(x);
+    output.innerHTML =y.value;
+}
+</script>
+<script type="text/javascript">
+    var bandname = document.getElementById("bandname");
+</script>
+
+<body onload="getID('Morrissey')">
+    
+<div id="search">
+    <b>ARTIST NAME</b>: <br>
+    <input id="bandname" value="MORRISSEY">
+<button onclick="getID(document.getElementById('bandname').value)">ENTER</button>
+</div>    
+    
+    
+
+<br>
+<br>
+<div><b>This is the Artist-ID:</b></div>    
+<div id="output"></div>
+<br>
+<div><b>And this are the Top-Tracks-ID's of this Artist:</b></div>
+<div id="output2"></div>
+
+    
+    
+
+    
+</body>
+</html>
