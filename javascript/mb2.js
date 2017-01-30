@@ -1,15 +1,13 @@
 
-// https://musicbrainz.org/ws/2/artist/?query=area:hamburg
-
 function callMb(city_) {
-//  var city = city_
-//  var url = "https://musicbrainz.org/ws/2/artist/?query=area:" + "berlin";
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     xml_string= this.responseText;
-     var new_artist = get_artist_from_xml(xml_string);
-     document.getElementById("output").innerHTML = new_artist;
+	    xml_string= this.responseText;
+	    var new_artist = get_artist_from_xml(xml_string);
+		console.log(new_artist); //final artist
+//	    document.getElementById("output").innerHTML = new_artist;   //this is for the test-html output
+	    return new_artist; // this is for site use
     }
   };
   var url = genUrl(city_);  //url is generated
@@ -32,19 +30,26 @@ function get_artist_from_xml(xml) {
 
     // Find the 'name' nodes and save into artist_nodes
     var artist_nodes = doc.getElementsByTagName('name');
-/*	var neededElements = [];
-	for (var i = 0, i < artist_nodes.length; i++) {
- 		  if (artist_nodes[i].parentNode == 'artist') {
-        	neededElements.push(artist_nodes[i])
+//    console.log(artist_nodes);      // this array is filled
+	var neededElements = [];
+
+	for (var i = 0; i < artist_nodes.length; i++) {
+ 		  if (artist_nodes[i].parentNode.nodeName == 'artist') {
+//        	neededElements.push(artist_nodes[i]) // this are all artists
     	}
-    }  */
+    } 
+//  	console.log(neededElements);  // now this is filled
 	var artist = [];
     // Loop through them and save their text content into an array
-    for (var i = 0; i < artist_nodes.length; i++) {
+    for (var i = 0; i < neededElements.length; i++) {
 //        if (artist_nodes[i].parentNode == 'artist') {
-        	artist.push(artist_nodes[i].firstChild.data)
+        	artist.push(neededElements[i].firstChild.data)
+        	console.log(artist[i]);
 //		}
     }
 	var rand = artist[Math.floor(Math.random() * artist.length)]; //random entry from artist array
     return rand;
 }
+
+
+
