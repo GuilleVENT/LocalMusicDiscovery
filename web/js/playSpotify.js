@@ -46,11 +46,25 @@ function findID(array){
 
     var parsedsearchartistsitems = parsedsearchartists.items;
 
-    var firstresult = parsedsearchartistsitems[0];
+    if(parsedsearchartistsitems.length < 1 ){
+    	console.log("THIS ARTIST COULDN'T BE FOUND IN SPOTIFY...looking for a new LOCAL MUSICIAN");
+    		
+    	var rand = LocalMusician[Math.floor(Math.random() * LocalMusician.length)];
+    	getID(rand);
+    	document.getElementById('nowPlaying').innerHTML = "Now playing: " + rand;
+    	
+    }
 
+   	var firstresult = parsedsearchartistsitems[0];
 
-    var artist_id = firstresult.id;
+  		 // console.log(firstresult);
 
+   	var name = firstresult.name;
+    
+    
+
+   	var artist_id = firstresult.id;	
+   	console.log(">>"+artist_id);
     TOPtracks(artist_id);
     return artist_id;
 
@@ -69,7 +83,9 @@ function TOPtracks(artist_id){
             var array = JSON.parse(this.responseText);
             var TOPsongs = [];
             TOPsongs = tracksID(array);
-            document.getElementById('myIframe').src = "https://embed.spotify.com/?uri=spotify:track:" + TOPsongs[0];
+            var RANDsong = TOPsongs[Math.floor(Math.random() * TOPsongs.length)];
+           	document.getElementById('myIframe').src = "https://embed.spotify.com/?uri=spotify:track:" + RANDsong;	//one of the top songs of the local artist chosen at random! 
+        	
         }
     });
 
@@ -100,8 +116,17 @@ function tracksID(array){
 
     var parsedbodytracks = array.tracks;
 
+ //   console.log("parsedbodytracks");
+ //   console.log(parsedbodytracks);
 
-    for(var i=0; i<10; i++){
+ 	if(parsedbodytracks.length < 1){
+ 		console.log("THIS ARTIST HAS NO SONGS AVAILABLE IN SPOTIFY");
+ 		var rand = LocalMusician[Math.floor(Math.random() * LocalMusician.length)];
+    	getID(rand);
+    	document.getElementById('nowPlaying').innerHTML = "Now playing: " + rand;
+ 	}
+
+    for(var i=0; i<parsedbodytracks.length; i++){
         var tracksinfo = parsedbodytracks[i];
                     //  console.log("...........................................tracksinfo = parsedbodytracks[i]")
                     //  console.log(tracksinfo);
@@ -115,7 +140,7 @@ function tracksID(array){
     return tracks_id;
 
 }
-
+var LocalMusician = [];			// LOCALMUSICION GLOBALLY GESPEICHERT	
 
 function callMb(city_) {
   var xhttp = new XMLHttpRequest();
@@ -123,7 +148,7 @@ function callMb(city_) {
     if (this.readyState == 4 && this.status == 200) {
 	    xml_string= this.responseText;
 	    var new_artist = get_artist_from_xml(xml_string);
-		console.log(new_artist); //final artist
+		console.log(">>"+new_artist); //final artist
 //	    document.getElementById("output").innerHTML = new_artist;   //this is for the test-html output
 	    getID(new_artist); // this is for site use
       document.getElementById('nowPlaying').innerHTML = "Now playing: " + new_artist;
@@ -169,19 +194,33 @@ function get_artist_from_xml(xml) {
         	console.log(artist[i]);
 //		}
     }
+    LocalMusician = artist;
+    
+//    var randoms = choose_random_artist(artist);
+
 	var rand = artist[Math.floor(Math.random() * neededElements.length)]; //random entry from artist array
 // console.log(rand);
     return rand;
 }
 //  <div id="mapholder"></div>
 //  <p id="city"></p>
+/*
+function choose_random_artist(artist){
+	var rand = artist[Math.floor(Math.random() * neededElements.length)];
 
-
+}
+*/
 
 //Place HERE INSIDE THE town_output Function Your CODE TO BE RUN WITH THE town. Here inside you can work with the object "town"      Mabe you can also use the function town_output() as a input argument in your function
+
+var town_t;			// TOWN GLOABALLY GESPEICHERT 		
+				
+
 function town_output(town) {
     //to show it works
     // document.getElementById("city").innerHTML = town;
+    town_t = town;
+    done = 1;
     callMb(town);
     console.log(town);
 }
@@ -192,10 +231,10 @@ function getLocation(number_of_town) {
         navigator.geolocation.getCurrentPosition(function (position) {
           //  showPosition(position);
             //here the argument parse_function will be also the callback function
-            console.log("here");
-            console.log(position);
-            console.log(parse_function);
-            console.log(number_of_town);
+           // console.log("here");
+           // console.log(position);
+            //console.log(parse_function);
+            //console.log(number_of_town);
             loadFile(position, parse_function, number_of_town);
         });
     } else {
@@ -238,6 +277,7 @@ function parse_function() {
     if (isNaN(town_number) || NearbyPlaces.geonames.length < town_number)
         town_number = getRndInteger(0, NearbyPlaces.geonames.length);
     town = NearbyPlaces.geonames[town_number].name;
+
     town_output(town);
 }
 
