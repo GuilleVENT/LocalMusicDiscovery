@@ -68,7 +68,7 @@
                 <h1 id="homeHeading" style="color: white; border-radius: 6px; text-shadow: 2px 3px #222222; font-size: 90px" >Discover music from local artists</h1>
                 <hr>
                 <p style="color: white">Are you traveling? Are you in another city? Discover the best music from local artists with, wherever you are.</p>
-                <a href="#about" class="btn btn-primary btn-xl page-scroll" >Try it out</a>
+                <a href="#about" onClick="changeSong()"  class="btn btn-primary btn-xl page-scroll" >Try it out</a>
             </div>
         </div>
     </header>
@@ -80,11 +80,11 @@
                     <h2 id="currentLocation" class="section-heading">Current Location: </h2>
                     <hr class="light">
                     <p class="text-faded">We found a local band for you! Just play the press button and start listening to the best local music! </p>
-                    <iframe id="myIframe" src="https://embed.spotify.com/?uri=spotify:track:1w5sLDYzYAGI0AkLc6FPlO" width="250" height="80" frameborder="0" allowtransparency="true" style="margin-bottom: 20px"></iframe>
-                    <h2 id="nowPlaying" class="section-heading"></h2>
+                    <iframe id="myIframe" src="https://embed.spotify.com/?uri=spotify:track:1w5sLDYzYAGI0AkLc6FPlO" width="300" height="300" frameborder="0" allowtransparency="true" style="margin-bottom: 20px"></iframe>
+                    <h2 id="nowPlaying" class="section-heading" style="margin-bottom:20px"></h2>
+                    <button class="btn btn-primary btn-xl page-scroll" value="Change site" onClick="changeSong()" style = "display:initial;" >Change Song</button>
                 </div>
-            </div>
-            <button class="btn btn-primary btn-xl page-scroll" value="Change site" onClick="changeSong()" style = "display:block; margin: 0 auto" >Change Song</button>
+          </div>
         </div>
     </section>
 
