@@ -226,8 +226,8 @@ var phi = 0;
 function town_output(town) {
     //to show it works
     // document.getElementById("city").innerHTML = town;
-    town_t = town;
-    done = 1;
+
+
     callMb(towns_array[phi]);
     console.log(town);
 }
@@ -309,8 +309,15 @@ function showPosition(position) {
 */
 function changeSong() {
 
-  getLocation(0);
 
+	if(towns_array.length<1){
+ 	 	getLocation(0);
+ 
+	}
+	else{
+		console.log(towns_array[phi]);
+		callMb(towns_array[phi])
+	}
 //  setTimeout(function(){},2000);
 
 //  document.getElementById('nowPlaying').innerHTML = "Now playing: " + artist;
