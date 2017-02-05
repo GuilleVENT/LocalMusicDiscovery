@@ -1,4 +1,4 @@
- 
+
 function getID(artist){
 
     var data = null;
@@ -319,17 +319,62 @@ function showPosition(position) {
 */
 function changeSong() {
 
-  document.getElementById("found1").innerHTML = "We found a local band for you!"
-  document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!"
-	if(towns_array.length<1){
- 	 	getLocation(0);
-    ;
+  document.getElementById("found1").innerHTML = "We found a local band for you!";
+  document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!";
+  	if(with_input=1){
+  		console.log("looking for new artist in input city");
+  		callMb2(town_input);
 	}
 	else{
-		console.log(towns_array[phi]);
-		callMb(towns_array[phi])
+		if(towns_array.length<1){
+ 	 		getLocation(0);
+    
+		}
+		else{
+			console.log(towns_array[phi]);
+			callbacklMb(towns_array[phi])
+		}
 	}
-//  setTimeout(function(){},2000);
-//  document.getElementById('nowPlaying').innerHTML = "Now playing: " + artist;
-
 }
+
+// IF INPUT TEXT.
+function text_input(input_town){
+	document.getElementById("found1").innerHTML = "We found a local band for you!";
+  	document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!";
+	with_input = 1;
+
+	town_input = input_town;
+	console.log(input_town);
+	callMb2(input_town);
+}
+
+
+var with_input = 0;
+var town_input; 
+
+
+function callMb2(city_) {
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+	    xml_string= this.responseText;
+	    var new_artist = get_artist_from_xml(xml_string);
+		console.log(">>"+new_artist); //final artist
+
+		if(new_artist == "undefined"){
+			console.log("NO ARTIST FOUND IN THIS CITY");
+			document.getElementById("found1").innerHTML = "We couldn't find any Local Artist in your selected city :(";
+  			document.getElementById("found2").innerHTML = "Please try another city";
+		}
+
+//	    document.getElementById("output").innerHTML = new_artist;   //this is for the test-html output
+	    getID(new_artist); // this is for site use
+      //document.getElementById('nowPlaying').innerHTML = "Now playing: " + new_artist;
+    }
+  };
+  var urlMB = genUrlMB(city_);  //url is generated
+  xhttp.open("GET", urlMB , true);
+  xhttp.send();
+}
+
