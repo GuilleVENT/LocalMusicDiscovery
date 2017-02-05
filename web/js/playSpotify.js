@@ -220,14 +220,11 @@ function choose_random_artist(artist){
 
 //Place HERE INSIDE THE town_output Function Your CODE TO BE RUN WITH THE town. Here inside you can work with the object "town"      Mabe you can also use the function town_output() as a input argument in your function
 
-<<<<<<< Updated upstream
-var town_t;			// TOWN GLOABALLY GESPEICHERT 		
+var town_t;			// TOWN GLOABALLY GESPEICHERT
 var towns_array	= [];
 var phi = 0;
-=======
 var town_t;			// TOWN GLOABALLY GESPEICHERT
 
->>>>>>> Stashed changes
 
 function town_output(town) {
     //to show it works
@@ -235,6 +232,7 @@ function town_output(town) {
 
 
     callMb(towns_array[phi]);
+    document.getElementById("currentLocation").innerHTML += towns_array[phi];
     console.log(town);
 }
 
@@ -318,14 +316,13 @@ function changeSong() {
 
 	if(towns_array.length<1){
  	 	getLocation(0);
- 
+    ;
 	}
 	else{
 		console.log(towns_array[phi]);
 		callMb(towns_array[phi])
 	}
 //  setTimeout(function(){},2000);
-
 //  document.getElementById('nowPlaying').innerHTML = "Now playing: " + artist;
 
 }
