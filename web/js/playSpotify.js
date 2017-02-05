@@ -149,6 +149,12 @@ function callMb(city_) {
 	    xml_string= this.responseText;
 	    var new_artist = get_artist_from_xml(xml_string);
 		console.log(">>"+new_artist); //final artist
+		if(new_artist == "undefined"){
+			phi+=1;
+			var j = towns_array[phi];
+			callMb(j);
+		}
+
 //	    document.getElementById("output").innerHTML = new_artist;   //this is for the test-html output
 	    getID(new_artist); // this is for site use
       document.getElementById('nowPlaying').innerHTML = "Now playing: " + new_artist;
@@ -214,14 +220,15 @@ function choose_random_artist(artist){
 //Place HERE INSIDE THE town_output Function Your CODE TO BE RUN WITH THE town. Here inside you can work with the object "town"      Mabe you can also use the function town_output() as a input argument in your function
 
 var town_t;			// TOWN GLOABALLY GESPEICHERT 		
-				
+var towns_array	= [];
+var phi = 0;
 
 function town_output(town) {
     //to show it works
     // document.getElementById("city").innerHTML = town;
     town_t = town;
     done = 1;
-    callMb(town);
+    callMb(towns_array[phi]);
     console.log(town);
 }
 
@@ -266,7 +273,7 @@ function loadFile(position, fCallback, number_of_town) {
 function genUrlPos(position) {
     var latit = position.coords.latitude;
     var longit = position.coords.longitude;
-    var url = "http://api.geonames.org/findNearbyPlaceNameJSON?lat=" + latit + "&lng=" + longit + "&radius=50&cities=cities15000&lang=EN&username=LocalMusicDiscovery";
+    var url = "http://api.geonames.org/findNearbyPlaceNameJSON?lat=" + latit + "&lng=" + longit + "&maxRows=50&radius=100&cities=cities15000&lang=EN&username=LocalMusicDiscovery";
     return url;
 }
 
@@ -278,6 +285,11 @@ function parse_function() {
         town_number = getRndInteger(0, NearbyPlaces.geonames.length);
     town = NearbyPlaces.geonames[town_number].name;
 
+    for(var i=0 ; i < NearbyPlaces.geonames.length; i++){
+    	var city = NearbyPlaces.geonames[i];
+    	towns_array.push(city.name);
+    }
+    console.log(towns_array);
     town_output(town);
 }
 
