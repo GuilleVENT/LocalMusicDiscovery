@@ -1,3 +1,4 @@
+
 function getID(artist){
 
     var data = null;
@@ -48,11 +49,11 @@ function findID(array){
 
     if(parsedsearchartistsitems.length < 1 ){
     	console.log("THIS ARTIST COULDN'T BE FOUND IN SPOTIFY...looking for a new LOCAL MUSICIAN");
-    		
+
     	var rand = LocalMusician[Math.floor(Math.random() * LocalMusician.length)];
     	getID(rand);
     	document.getElementById('nowPlaying').innerHTML = "Now playing: " + rand;
-    	
+
     }
 
    	var firstresult = parsedsearchartistsitems[0];
@@ -60,10 +61,10 @@ function findID(array){
   		 // console.log(firstresult);
 
    	var name = firstresult.name;
-    
-    
 
-   	var artist_id = firstresult.id;	
+
+
+   	var artist_id = firstresult.id;
    	console.log(">>"+artist_id);
     TOPtracks(artist_id);
     return artist_id;
@@ -84,8 +85,8 @@ function TOPtracks(artist_id){
             var TOPsongs = [];
             TOPsongs = tracksID(array);
             var RANDsong = TOPsongs[Math.floor(Math.random() * TOPsongs.length)];
-           	document.getElementById('myIframe').src = "https://embed.spotify.com/?uri=spotify:track:" + RANDsong;	//one of the top songs of the local artist chosen at random! 
-        	
+           	document.getElementById('myIframe').src = "https://embed.spotify.com/?uri=spotify:track:" + RANDsong;	//one of the top songs of the local artist chosen at random!
+
         }
     });
 
@@ -140,7 +141,7 @@ function tracksID(array){
     return tracks_id;
 
 }
-var LocalMusician = [];			// LOCALMUSICION GLOBALLY GESPEICHERT	
+var LocalMusician = [];			// LOCALMUSICION GLOBALLY GESPEICHERT
 
 function callMb(city_) {
   var xhttp = new XMLHttpRequest();
@@ -201,7 +202,7 @@ function get_artist_from_xml(xml) {
 //		}
     }
     LocalMusician = artist;
-    
+
 //    var randoms = choose_random_artist(artist);
 
 	var rand = artist[Math.floor(Math.random() * neededElements.length)]; //random entry from artist array
@@ -219,9 +220,14 @@ function choose_random_artist(artist){
 
 //Place HERE INSIDE THE town_output Function Your CODE TO BE RUN WITH THE town. Here inside you can work with the object "town"      Mabe you can also use the function town_output() as a input argument in your function
 
+<<<<<<< Updated upstream
 var town_t;			// TOWN GLOABALLY GESPEICHERT 		
 var towns_array	= [];
 var phi = 0;
+=======
+var town_t;			// TOWN GLOABALLY GESPEICHERT
+
+>>>>>>> Stashed changes
 
 function town_output(town) {
     //to show it works
