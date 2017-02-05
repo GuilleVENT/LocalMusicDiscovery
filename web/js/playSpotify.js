@@ -313,7 +313,8 @@ function showPosition(position) {
 */
 function changeSong() {
 
-
+  document.getElementById("found1").innerHTML = "We found a local band for you!"
+  document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!"
 	if(towns_array.length<1){
  	 	getLocation(0);
     ;
