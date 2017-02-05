@@ -168,7 +168,7 @@ function callMb(city_) {
 
 
 function genUrlMB(city) {
-	var url = "https://musicbrainz.org/ws/2/artist/?query=area:" + city;
+	var url = "https://musicbrainz.org/ws/2/artist/?query=area:" + city + "&limit=100";
 
 
 	return url;
