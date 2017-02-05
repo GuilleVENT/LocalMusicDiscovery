@@ -31,7 +31,7 @@ function getID(artist){
 
 function genUrl(artist) {
 
-	var url = "https://api.spotify.com/v1/search?q="+artist+"&type=artist&market=DE&limit=1";
+	var url = "https://api.spotify.com/v1/search?q="+artist+"&type=artist&market=US&limit=1";
 //    console.log("URL Generated succesfully : ")
 //console.log(url);
 	return url;
@@ -52,6 +52,7 @@ function findID(array){
     	console.log("THIS ARTIST COULDN'T BE FOUND IN SPOTIFY...looking for a new LOCAL MUSICIAN");
 
     	var rand = LocalMusician[Math.floor(Math.random() * LocalMusician.length)];
+    	console.log(rand);
     	getID(rand);
     	playing_artist = rand;
     	//document.getElementById('nowPlaying').innerHTML = "Now playing: " + rand;
@@ -68,6 +69,7 @@ function findID(array){
 
    	var artist_id = firstresult.id;
    	console.log(">>"+artist_id);
+   	document.getElementById('artistFollow').src = "https://embed.spotify.com/follow/1/?uri=spotify:artist:" + artist_id;
     TOPtracks(artist_id);
     return artist_id;
 
@@ -88,6 +90,9 @@ function TOPtracks(artist_id){
             TOPsongs = tracksID(array);
             document.getElementById('nowPlaying').innerHTML = "Now playing: " + playing_artist;
             var RANDsong = TOPsongs[Math.floor(Math.random() * TOPsongs.length)];
+            if(RANDsong == "undefined"){
+            	RANDsong = TOPsongs[Math.floor(Math.random() * TOPsongs.length)];
+            }
            	document.getElementById('myIframe').src = "https://embed.spotify.com/?uri=spotify:track:" + RANDsong;	//one of the top songs of the local artist chosen at random!
 
         }
@@ -106,7 +111,7 @@ function TOPtracks(artist_id){
 }
 
 function genUrl2(artist_id){
-	var url2 = "https://api.spotify.com/v1/artists/"+artist_id+"/top-tracks?country=DE";
+	var url2 = "https://api.spotify.com/v1/artists/"+artist_id+"/top-tracks?country=US";
 //console.log("URL2 Generated succesfully : ")
 //    console.log(url2);
 	return url2;
@@ -155,15 +160,15 @@ function callMb(city_) {
 	    xml_string= this.responseText;
 	    var new_artist = get_artist_from_xml(xml_string);
 		console.log(">>"+new_artist); //final artist
-		if(new_artist == "undefined"){
-			phi+=1;
-			var j = towns_array[phi];
-			callMb(j);
+		if(new_artist == undefined){
+			callMbagain(towns_array);
+			
 		}
-
+		else{
 //	    document.getElementById("output").innerHTML = new_artist;   //this is for the test-html output
 	    getID(new_artist); // this is for site use
       //document.getElementById('nowPlaying').innerHTML = "Now playing: " + new_artist;
+      	}
     }
   };
   var urlMB = genUrlMB(city_);  //url is generated
@@ -171,8 +176,20 @@ function callMb(city_) {
   xhttp.send();
 }
 
+function callMbagain(towns_array){
+	var pha = phi + 1;
+	console.log("TOWN CORRECTED TO: "+towns_array[pha]);
+	callMb(towns_array[pha]);
+}
 
 function genUrlMB(city) {
+	/*
+	if (city.indexOf(' ') > -1)
+	{	
+		var j = "%20";
+ 		city.replace(/ /g , j);
+	}
+	*/
 	var url = "https://musicbrainz.org/ws/2/artist/?query=area:" + city + "&limit=100";
 
 
@@ -319,33 +336,59 @@ function showPosition(position) {
 */
 function changeSong() {
 
-  document.getElementById("found1").innerHTML = "We found a local band for you!";
-  document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!";
-  	if(with_input=1){
+ 
+  	if(with_input==1){
+  		document.getElementById("found1").innerHTML = "We found this local band in "+town_input+" for you!";
+  		document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!";
   		console.log("looking for new artist in input city");
   		callMb2(town_input);
 	}
 	else{
 		if(towns_array.length<1){
+ 	 		document.getElementById("found1").innerHTML = "We found a local band in your location!";
+  			document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!";
  	 		getLocation(0);
     
 		}
 		else{
 			console.log(towns_array[phi]);
-			callbacklMb(towns_array[phi])
+			callMb(towns_array[phi]);
 		}
 	}
 }
 
+function LocationButton(){
+
+	document.getElementById("found1").innerHTML = "We found a local band in your location!";
+  	document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!";
+
+	if(towns_array.length<1){
+ 	 		getLocation(0);
+		}
+		else{
+			console.log(towns_array[phi]);
+			callMb(towns_array[phi]);
+		}
+
+}
 // IF INPUT TEXT.
 function text_input(input_town){
-	document.getElementById("found1").innerHTML = "We found a local band for you!";
-  	document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!";
+	
 	with_input = 1;
+	var TOWN = String(input_town);
 
-	town_input = input_town;
+	town_input = TOWN;
 	console.log(input_town);
-	callMb2(input_town);
+	var spacebar = " ";
+	var substitute = "%20";
+	
+	TOWN.replace(spacebar, substitute);
+	console.log(TOWN);
+	
+	callMb2(TOWN);
+
+	document.getElementById("found1").innerHTML = "We found this local band in "+input_town+" for you!";
+  	document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!";
 }
 
 
@@ -362,15 +405,16 @@ function callMb2(city_) {
 	    var new_artist = get_artist_from_xml(xml_string);
 		console.log(">>"+new_artist); //final artist
 
-		if(new_artist == "undefined"){
+		if(new_artist == undefined){
 			console.log("NO ARTIST FOUND IN THIS CITY");
 			document.getElementById("found1").innerHTML = "We couldn't find any Local Artist in your selected city :(";
   			document.getElementById("found2").innerHTML = "Please try another city";
 		}
-
+		else{
 //	    document.getElementById("output").innerHTML = new_artist;   //this is for the test-html output
 	    getID(new_artist); // this is for site use
       //document.getElementById('nowPlaying').innerHTML = "Now playing: " + new_artist;
+  		}
     }
   };
   var urlMB = genUrlMB(city_);  //url is generated

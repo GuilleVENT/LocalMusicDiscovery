@@ -77,17 +77,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <p>Let us use your Location or give a City</p>
                     <div id="search">
-                    <input id="city" value="" style=color:black>
+                    <input id="city" value="" style=color:#069908 face="Verdana">
                     <button onclick="text_input(city.value)">Search Here</button>
-                    </div>
+                    </div><br>
+                    <button class="btn btn-primary btn-xl page-scroll" value="Change site" onClick="LocationButton()" style = "display:initial;" >Find Artists in my Location</button><br>
                     <h2 id="currentLocation" class="section-heading">Current Location: </h2>
                     <hr class="light">
                     <p id="found1" class="text-faded"> </p>
                     <p id="found2" class="text-faded"> </p>
                     <iframe id="myIframe" src="https://embed.spotify.com/?uri=spotify:track:1w5sLDYzYAGI0AkLc6FPlO" width="300" height="300" frameborder="0" allowtransparency="true" style="margin-bottom: 20px"></iframe>
                     <h2 id="nowPlaying" class="section-heading" style="margin-bottom:20px"></h2>
-                    <button class="btn btn-primary btn-xl page-scroll" value="Change site" onClick="changeSong()" style = "display:initial;" >Change Song</button>
+                    <button class="btn btn-primary btn-xl page-scroll" value="Change site" onClick="changeSong()" style = "display:initial;" >Change Song</button><br>
+                    <p>Show your support! Follow your Local Musician:</p>
+                    <iframe id="artistFollow" src="https://embed.spotify.com/follow/1/?uri=spotify:artist:2QsynagSdAqZj3U9HgDzjD&size=basic&theme=dark&show-count=0" width="150" height="30" scrolling="no" frameborder="0" style="border:solid; border-color:#069908; overflow:hidden;" allowtransparency="true"></iframe>
+                 <!--   <iframe id="artistFollow" src="https://embed.spotify.com/follow/1/?uri=spotify:artist:2QsynagSdAqZj3U9HgDzjD&size=detail&theme=light&show-count=0" width="300" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden; background-color:#dce5dc;" allowtransparency="true"></iframe>
+                     -->
                 </div>
           </div>
         </div>
