@@ -1,4 +1,4 @@
-
+ 
 function getID(artist){
 
     var data = null;
@@ -38,6 +38,7 @@ function genUrl(artist) {
 
 }
 
+var playing_artist;
 
 function findID(array){
 
@@ -52,7 +53,8 @@ function findID(array){
 
     	var rand = LocalMusician[Math.floor(Math.random() * LocalMusician.length)];
     	getID(rand);
-    	document.getElementById('nowPlaying').innerHTML = "Now playing: " + rand;
+    	playing_artist = rand;
+    	//document.getElementById('nowPlaying').innerHTML = "Now playing: " + rand;
 
     }
 
@@ -84,6 +86,7 @@ function TOPtracks(artist_id){
             var array = JSON.parse(this.responseText);
             var TOPsongs = [];
             TOPsongs = tracksID(array);
+            document.getElementById('nowPlaying').innerHTML = "Now playing: " + playing_artist;
             var RANDsong = TOPsongs[Math.floor(Math.random() * TOPsongs.length)];
            	document.getElementById('myIframe').src = "https://embed.spotify.com/?uri=spotify:track:" + RANDsong;	//one of the top songs of the local artist chosen at random!
 
@@ -123,8 +126,10 @@ function tracksID(array){
  	if(parsedbodytracks.length < 1){
  		console.log("THIS ARTIST HAS NO SONGS AVAILABLE IN SPOTIFY");
  		var rand = LocalMusician[Math.floor(Math.random() * LocalMusician.length)];
+ 		playing_artist = rand;
     	getID(rand);
-    	document.getElementById('nowPlaying').innerHTML = "Now playing: " + rand;
+    	
+    	//document.getElementById('nowPlaying').innerHTML = "Now playing: " + rand;
  	}
 
     for(var i=0; i<parsedbodytracks.length; i++){
@@ -137,7 +142,7 @@ function tracksID(array){
         console.log(tracks_id[i]);
 
     }
-
+    
     return tracks_id;
 
 }
@@ -158,7 +163,7 @@ function callMb(city_) {
 
 //	    document.getElementById("output").innerHTML = new_artist;   //this is for the test-html output
 	    getID(new_artist); // this is for site use
-      document.getElementById('nowPlaying').innerHTML = "Now playing: " + new_artist;
+      //document.getElementById('nowPlaying').innerHTML = "Now playing: " + new_artist;
     }
   };
   var urlMB = genUrlMB(city_);  //url is generated
@@ -206,6 +211,7 @@ function get_artist_from_xml(xml) {
 //    var randoms = choose_random_artist(artist);
 
 	var rand = artist[Math.floor(Math.random() * neededElements.length)]; //random entry from artist array
+	playing_artist = rand;
 // console.log(rand);
     return rand;
 }
