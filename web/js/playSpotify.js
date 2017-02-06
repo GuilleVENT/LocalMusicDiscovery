@@ -312,7 +312,7 @@ function loadFile(position, fCallback, number_of_town) {
 function genUrlPos(position) {
     var latit = position.coords.latitude;
     var longit = position.coords.longitude;
-    var url = "http://api.geonames.org/findNearbyPlaceNameJSON?lat=" + latit + "&lng=" + longit + "&maxRows=50&radius=100&cities=cities15000&lang=EN&username=LocalMusicDiscovery";
+    var url = "https://ws.geonames.net/findNearbyPlaceNameJSON?lat=" + latit + "&lng=" + longit + "&maxRows=50&radius=100&cities=cities15000&lang=EN&username=LocalMusicDiscovery";
     return url;
 }
 
@@ -350,7 +350,7 @@ function changeSong() {
 
     	if(with_input==1){
             document.getElementById("found1").innerHTML = "We found a local band in "+town_input+" for you!";
-            document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!";
+            document.getElementById("found2").innerHTML = "Just press the play button and start listening to the best local music!";
 
             //console.log("looking for new artist in input city");
   		callMb2(town_input);
@@ -358,7 +358,7 @@ function changeSong() {
 	else{
             if (towns_array.length < 1 || towns_array==null){
             document.getElementById("found1").innerHTML = "We found a local band in your location!";
-            document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!";
+            document.getElementById("found2").innerHTML = "Just press the play button and start listening to the best local music!";
             getLocation(0);
     
 		}
@@ -372,7 +372,7 @@ function changeSong() {
 function LocationButton() {
     
        	document.getElementById("found1").innerHTML = "We found a local band in your location!";
-    	document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!";
+              document.getElementById("found2").innerHTML = "Just press the play button and start listening to the best local music!";
     
         	if(towns_array.length < 1) {
             	 		getLocation(0);
