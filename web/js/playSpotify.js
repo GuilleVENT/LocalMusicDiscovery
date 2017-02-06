@@ -92,7 +92,7 @@ function TOPtracks(artist_id){
             TOPsongs = tracksID(array);
             document.getElementById('nowPlaying').innerHTML = "Now playing: " + playing_artist;
             var RANDsong = TOPsongs[Math.floor(Math.random() * TOPsongs.length)];
-            if (RANDsong == "undefined") {
+            while(RANDsong == "undefined") {
                 RANDsong = TOPsongs[Math.floor(Math.random() * TOPsongs.length)];
             }
             document.getElementById("found1").innerHTML = "We found "+playing_artist+" in your location!";
