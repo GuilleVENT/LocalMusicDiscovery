@@ -191,8 +191,8 @@ function callMbagain(towns_array) {
 }
 
 function genUrlMB(city) {
-	var url = "https://musicbrainz.org/ws/2/artist/?query=area:" + city + "&limit=100";
-
+	var url = "https://musicbrainz.org/ws/2/artist/?query=area:\"" + city + "\"&limit=100";
+  console.log(url);
 
 	return url;
 }
@@ -392,16 +392,16 @@ function text_input(input_town){
     var TOWN = String(input_town);
     town_input = TOWN;
 //	console.log(input_town);
-    var spacebar = " ";
+/*    var spacebar = " ";
     	var substitute = "%20";
     
     	TOWN.replace(spacebar, substitute);
     	console.log(TOWN);
-    
+*/    
     	callMb2(TOWN);
     
     	document.getElementById("found1").innerHTML = "We found this local band in " + input_town + " for you!";
-      	document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!";
+      	document.getElementById("found2").innerHTML = "Just press the play button and start listening to the best local music!";
 
 
 
@@ -434,6 +434,7 @@ function callMb2(city_) {
           }
       }
   };
+  city_ = encodeURIComponent(city_.trim());
   var urlMB = genUrlMB(city_);  //url is generated
   xhttp.open("GET", urlMB , true);
   xhttp.send();
