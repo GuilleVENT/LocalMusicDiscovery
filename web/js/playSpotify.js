@@ -192,7 +192,6 @@ function callMbagain(towns_array) {
 
 function genUrlMB(city) {
 	var url = "https://musicbrainz.org/ws/2/artist/?query=area:\"" + city + "\"&limit=100";
-  console.log(url);
 
 	return url;
 }
