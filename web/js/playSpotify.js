@@ -69,7 +69,6 @@ function findID(array){
 
    	var artist_id = firstresult.id;
    //	console.log(">>"+artist_id);
-   	document.getElementById("found1").innerHTML = "We found "+playing_artist+" in your location!";
     document.getElementById('artistFollow').src = "https://embed.spotify.com/follow/1/?uri=spotify:artist:" + artist_id;
 
     TOPtracks(artist_id);
@@ -95,7 +94,6 @@ function TOPtracks(artist_id){
             while(RANDsong == "undefined") {
                 RANDsong = TOPsongs[Math.floor(Math.random() * TOPsongs.length)];
             }
-            document.getElementById("found1").innerHTML = "We found "+playing_artist+" in your location!";
             document.getElementById('myIframe').src = "https://embed.spotify.com/?uri=spotify:track:" + RANDsong;	//one of the top songs of the local artist chosen at random!
 
         }
@@ -359,7 +357,7 @@ function changeSong() {
 	}
 	else{
             if (towns_array.length < 1 || towns_array==null){
-            document.getElementById("found1").innerHTML = "Just a second... we are looking for your location!";
+            document.getElementById("found1").innerHTML = "We found a local band in your location!";
             document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!";
             getLocation(0);
     
@@ -373,7 +371,7 @@ function changeSong() {
 
 function LocationButton() {
     
-       	document.getElementById("found1").innerHTML = "Just a second... we are looking for your location!";
+       	document.getElementById("found1").innerHTML = "We found a local band in your location!";
     	document.getElementById("found2").innerHTML = "Just play the press button and start listening to the best local music!";
     
         	if(towns_array.length < 1) {
