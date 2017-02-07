@@ -40,7 +40,7 @@ function genUrl(artist) {
 }
 
 var playing_artist;
-
+var foo = 0;
 function findID(array){
 
     var parsedsearch = array;
@@ -50,29 +50,37 @@ function findID(array){
     var parsedsearchartistsitems = parsedsearchartists.items;
 
     if(parsedsearchartistsitems.length < 1 ){
-    	//console.log("THIS ARTIST COULDN'T BE FOUND IN SPOTIFY...looking for a new LOCAL MUSICIAN");
-
-    	var rand = LocalMusician[Math.floor(Math.random() * LocalMusician.length)];
-    	getID(rand);
-    	playing_artist = rand;
-    	//document.getElementById('nowPlaying').innerHTML = "Now playing: " + rand;
-
+        console.log("THIS ARTIST COULDN'T BE FOUND IN SPOTIFY...looking for a new LOCAL MUSICIAN");
+        foo = foo + 1;
+        var limit = 10; // LocalMusician.length;
+        if(foo == limit && with_input == 1){
+            console.log("NO ARTIST FOUND IN THIS CITY");
+            document.getElementById("found1").innerHTML = "We couldn't find any Local Artist in your selected city. Check your spelling or please try another city!";
+        }
+        else{
+        var rand = LocalMusician[Math.floor(Math.random() * LocalMusician.length)];
+        getID(rand);
+        playing_artist = rand;
+        //document.getElementById('nowPlaying').innerHTML = "Now playing: " + rand;
     }
-
-   	var firstresult = parsedsearchartistsitems[0];
-
-  		 // console.log(firstresult);
-
-   	var name = firstresult.name;
+    }
+    else{
+    var firstresult = parsedsearchartistsitems[0];
 
 
+    console.log(firstresult);
+  
+    var name = firstresult.name;
 
-   	var artist_id = firstresult.id;
-   //	console.log(">>"+artist_id);
-   //  document.getElementById('artistFollow').src = "https://embed.spotify.com/follow/1/?uri=spotify:artist:" + artist_id;
+
+
+    var artist_id = firstresult.id;
+    console.log(">>"+artist_id);
+//    document.getElementById('artistFollow').src = "https://embed.spotify.com/follow/1/?uri=spotify:artist:" + artist_id;
 
     TOPtracks(artist_id);
     return artist_id;
+    }
 
 }
 
@@ -368,6 +376,7 @@ function changeSong() {
 
 function LocationButton() {
 
+        with_input = 0;
         if(towns_array.length < 1) {
           getLocation(0);
 
