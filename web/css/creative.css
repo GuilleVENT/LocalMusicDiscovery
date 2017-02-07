@@ -419,3 +419,22 @@ body {
 
   color: white; border-radius: 6px; text-shadow: 2px 3px #222222; font-size: 90px
 }
+
+#imaginary_container{
+    margin-top:20%; /* Don't copy this */
+}
+.stylish-input-group .input-group-addon{
+  border-color: white;
+}
+.stylish-input-group .form-control{
+	box-shadow:0 0 0;
+	border-color: white;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+.form-control::-webkit-input-placeholder { color: white; }
+.form-control:-moz-placeholder { color: white; }
+.form-control::-moz-placeholder { color: white; }
+.form-control:-ms-input-placeholder { color: white; }
