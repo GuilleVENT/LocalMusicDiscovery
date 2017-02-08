@@ -69,7 +69,7 @@ function findID(array){
 
 
   //  console.log(firstresult);
-  
+
     var name = firstresult.name;
 
 
@@ -388,8 +388,9 @@ function LocationButton() {
         	console.log(towns_array[phi]);
         	callMb(towns_array[phi]);
         }
-      //  document.getElementById("currentLocation").innerHTML = "Playing music from: " + towns_array[0];
-      //  document.getElementById("found1").innerHTML = "We found a local band in " + towns_array[0] +  " for you! Just press the play button and start listening to the best local music!";
+
+        document.getElementById("currentLocation").innerHTML = "Playing music from: Munich";
+        //document.getElementById("found1").innerHTML = "We found a local band in " + towns_array[0] +  " for you! Just press the play button and start listening to the best local music!";
         //document.getElementById("found2").innerHTML = "Just press the play button and start listening to the best local music!";
 
 }
