@@ -76,7 +76,7 @@ function findID(array){
 
     var artist_id = firstresult.id;
  //   console.log(">>"+artist_id);
-//    document.getElementById('artistFollow').src = "https://embed.spotify.com/follow/1/?uri=spotify:artist:" + artist_id;
+    document.getElementById('artistFollow').src = "https://embed.spotify.com/follow/1/?uri=spotify:artist:" + artist_id+"&size=detail&theme=dark";
 
     TOPtracks(artist_id);
     return artist_id;
