@@ -370,8 +370,9 @@ function changeSong() {
 		        }
 		        else{
 	             //		console.log(towns_array[phi]);
-               callMb(towns_array[phi]);
-               document.getElementById("found1").innerHTML = "We found this local band in " + towns_array[0] + " for you! Just press the play button and start listening to the best local music!"
+	            document.getElementById("currentLocation").innerHTML = "Playing music from: " + towns_array[0];
+               	callMb(towns_array[phi]);
+               	document.getElementById("found1").innerHTML = "We found this local band in " + towns_array[0] + " for you! Just press the play button and start listening to the best local music!"
 		        }
 	  }
 }
@@ -408,7 +409,7 @@ function text_input(input_town){
 */
     	callMb2(TOWN);
 
-      document.getElementById("currentLocation").innerHTML = "Playing music from: " + input_town;
+     	document.getElementById("currentLocation").innerHTML = "Playing music from: " + input_town;
     	document.getElementById("found1").innerHTML = "We found this local band in " + input_town + " for you! Just press the play button and start listening to the best local music!";
 
 
